@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: LLM Decision Engine API
+  version: 1.0.0
+  description: API for converting unstructured decision questions into structured decision models.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /v1/decision/analyze:
+    post:
+      summary: Analyze a decision question
+      operationId: analyzeDecision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeRequest'
+      responses:
+        '200':
+          description: Structured decision model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyzeResponse'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Decision extraction or validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    AnalyzeRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          example: Should I move to Dubai for a software job?
+    AnalyzeResponse:
+      type: object
+      required:
+        - decision
+      properties:
+        decision:
+          $ref: '#/components/schemas/Decision'
+    Decision:
+      type: object
+      required:
+        - problem_definition
+        - decision_type
+        - options
+        - key_factors
+        - risks
+        - unknowns
+        - recommended_next_questions
+      properties:
+        problem_definition:
+          type: string
+          example: Moving to Dubai for a software job
+        decision_type:
+          type: string
+          example: life/career
+        options:
+          type: array
+          items:
+            type: string
+          example:
+            - Move to Dubai
+            - Stay in current country
+        key_factors:
+          type: array
+          items:
+            type: string
+          example:
+            - salary
+            - cost of living
+            - career growth
+            - visa stability
+            - quality of life
+        risks:
+          type: array
+          items:
+            type: string
+          example:
+            - job instability
+            - high living costs
+            - cultural adaptation
+        unknowns:
+          type: array
+          items:
+            type: string
+          example:
+            - exact salary offer
+            - long term visa policy
+            - housing costs near the workplace
+        recommended_next_questions:
+          type: array
+          items:
+            type: string
+          example:
+            - What salary is offered?
+            - What is the visa duration?
+            - What is the rent cost?
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          example: invalid request body
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          example: ok
