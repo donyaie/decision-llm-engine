@@ -55,7 +55,7 @@ components:
       properties:
         question:
           type: string
-          example: Should I move to Dubai for a software job?
+          example: Should I switch from mobile development to AI/LLM engineering?
     AnalyzeResponse:
       type: object
       required:
@@ -76,51 +76,51 @@ components:
       properties:
         problem_definition:
           type: string
-          example: Moving to Dubai for a software job
+          example: Switching from mobile development to AI/LLM engineering
         decision_type:
           type: string
-          example: life/career
+          example: career
         options:
           type: array
           items:
             type: string
           example:
-            - Move to Dubai
-            - Stay in current country
+            - Transition into AI/LLM engineering
+            - Stay in mobile development
         key_factors:
           type: array
           items:
             type: string
           example:
-            - salary
-            - cost of living
-            - career growth
-            - visa stability
-            - quality of life
+            - market demand
+            - learning curve
+            - portfolio readiness
+            - income stability
+            - long-term career growth
         risks:
           type: array
           items:
             type: string
           example:
-            - job instability
-            - high living costs
-            - cultural adaptation
+            - temporary productivity dip
+            - shallow domain knowledge
+            - slower-than-expected job transition
         unknowns:
           type: array
           items:
             type: string
           example:
-            - exact salary offer
-            - long term visa policy
-            - housing costs near the workplace
+            - time needed to become job-ready
+            - availability of AI/LLM roles
+            - salary impact during transition
         recommended_next_questions:
           type: array
           items:
             type: string
           example:
-            - What salary is offered?
-            - What is the visa duration?
-            - What is the rent cost?
+            - What AI/LLM skills are most required for target roles?
+            - How long will it take to build a credible portfolio?
+            - Can the transition start inside the current role?
     ErrorResponse:
       type: object
       required:

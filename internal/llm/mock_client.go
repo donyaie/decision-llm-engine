@@ -53,15 +53,15 @@ func generateMockDecision(question string) (string, error) {
 	}
 
 	switch {
-	case strings.Contains(lower, "dubai"):
+	case strings.Contains(lower, "mobile") && (strings.Contains(lower, "ai") || strings.Contains(lower, "llm")):
 		payload = decisionPayload{
-			ProblemDefinition: "Moving to Dubai for a software job",
-			DecisionType:      "life/career",
-			Options:           []string{"Move to Dubai", "Stay in current country"},
-			KeyFactors:        []string{"salary", "cost of living", "career growth", "visa stability", "quality of life"},
-			Risks:             []string{"job instability", "high living costs", "cultural adaptation"},
-			Unknowns:          []string{"exact salary offer", "long term visa policy", "housing costs near the workplace"},
-			NextQuestions:     []string{"What salary is offered?", "What is the visa duration?", "What is the rent cost?"},
+			ProblemDefinition: "Switching from mobile development to AI/LLM engineering",
+			DecisionType:      "career",
+			Options:           []string{"Transition into AI/LLM engineering", "Stay in mobile development"},
+			KeyFactors:        []string{"market demand", "learning curve", "portfolio readiness", "income stability", "long-term career growth"},
+			Risks:             []string{"temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"},
+			Unknowns:          []string{"time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"},
+			NextQuestions:     []string{"What AI/LLM skills are most required for target roles?", "How long will it take to build a credible portfolio?", "Can the transition start inside the current role?"},
 		}
 	case strings.Contains(lower, "master") && strings.Contains(lower, "ai"):
 		payload = decisionPayload{

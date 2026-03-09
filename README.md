@@ -40,7 +40,7 @@ It is designed as a practical AI systems engineering example for:
 
 Users often ask emotionally loaded and unstructured questions such as:
 
-> Should I move to Dubai for a software job?
+> Should I switch from mobile development to AI/LLM engineering?
 
 This project turns that type of input into a structured decision object with clear options, factors, risks, unknowns, and recommended follow-up questions.
 
@@ -59,13 +59,23 @@ This project turns that type of input into a structured decision object with cle
 
 ```json
 {
-  "problem_definition": "Moving to Dubai for a software job",
-  "decision_type": "life/career",
-  "options": ["Move to Dubai", "Stay in current country"],
-  "key_factors": ["salary", "cost of living", "career growth", "visa stability", "quality of life"],
-  "risks": ["job instability", "high living costs", "cultural adaptation"],
-  "unknowns": ["exact salary offer", "long term visa policy", "housing costs near the workplace"],
-  "recommended_next_questions": ["What salary is offered?", "What is the visa duration?", "What is the rent cost?"]
+  "problem_definition": "Switching from mobile development to AI/LLM engineering",
+  "decision_type": "career",
+  "options": ["Transition into AI/LLM engineering", "Stay in mobile development"],
+  "key_factors": [
+    "market demand",
+    "learning curve",
+    "portfolio readiness",
+    "income stability",
+    "long-term career growth"
+  ],
+  "risks": ["temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"],
+  "unknowns": ["time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"],
+  "recommended_next_questions": [
+    "What AI/LLM skills are most required for target roles?",
+    "How long will it take to build a credible portfolio?",
+    "Can the transition start inside the current role?"
+  ]
 }
 ```
 
@@ -168,7 +178,7 @@ type Decision struct {
 
 ```json
 {
-  "question": "Should I move to Dubai for a software job?"
+  "question": "Should I switch from mobile development to AI/LLM engineering?"
 }
 ```
 
@@ -177,13 +187,23 @@ type Decision struct {
 ```json
 {
   "decision": {
-    "problem_definition": "Moving to Dubai for a software job",
-    "decision_type": "life/career",
-    "options": ["Move to Dubai", "Stay in current country"],
-    "key_factors": ["salary", "cost of living", "career growth", "visa stability", "quality of life"],
-    "risks": ["job instability", "high living costs", "cultural adaptation"],
-    "unknowns": ["exact salary offer", "long term visa policy", "housing costs near the workplace"],
-    "recommended_next_questions": ["What salary is offered?", "What is the visa duration?", "What is the rent cost?"]
+    "problem_definition": "Switching from mobile development to AI/LLM engineering",
+    "decision_type": "career",
+    "options": ["Transition into AI/LLM engineering", "Stay in mobile development"],
+    "key_factors": [
+      "market demand",
+      "learning curve",
+      "portfolio readiness",
+      "income stability",
+      "long-term career growth"
+    ],
+    "risks": ["temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"],
+    "unknowns": ["time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"],
+    "recommended_next_questions": [
+      "What AI/LLM skills are most required for target roles?",
+      "How long will it take to build a credible portfolio?",
+      "Can the transition start inside the current role?"
+    ]
   }
 }
 ```
@@ -255,7 +275,7 @@ Then open [http://localhost:8080/swagger/](http://localhost:8080/swagger/) to ex
 ```bash
 curl -X POST http://localhost:8080/v1/decision/analyze \
   -H "Content-Type: application/json" \
-  -d '{"question":"Should I move to Dubai for a software job?"}'
+      -d '{"question":"Should I switch from mobile development to AI/LLM engineering?"}'
 ```
 
 ### Run Tests
@@ -276,7 +296,7 @@ go test ./tests -run TestRealLLMDecisionFlow -v
 
 ### Career
 
-- Should I move to Dubai for a software job?
+- Should I switch from mobile development to AI/LLM engineering?
 
 ### Education
 

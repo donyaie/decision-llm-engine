@@ -53,7 +53,7 @@ func TestRealLLMDecisionFlow(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 90*time.Second)
 	defer cancel()
 
-	decision, err := decisionEngine.Analyze(ctx, "Should I move to Dubai for a software job?")
+	decision, err := decisionEngine.Analyze(ctx, "Should I switch from mobile development to AI/LLM engineering?")
 	if err != nil {
 		t.Fatalf("real LLM decision analysis failed: %v", err)
 	}
