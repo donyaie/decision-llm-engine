@@ -1,6 +1,40 @@
 # LLM Decision Engine
 
+![Go Version](https://img.shields.io/badge/Go-1.22-00ADD8?logo=go)
+![Gin](https://img.shields.io/badge/API-Gin-008ECF)
+![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0-6BA539?logo=openapiinitiative)
+![Ollama Ready](https://img.shields.io/badge/Ollama-ready-111111)
+![Status](https://img.shields.io/badge/status-experimental-orange)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
 A production-oriented Go service that converts ambiguous natural-language decision questions into structured decision models that downstream systems can validate, analyze, and extend.
+
+## Why this project exists
+
+Decision questions are usually messy, emotional, and incomplete. This project demonstrates how to turn that ambiguity into a clean JSON contract that an API, workflow engine, agent system, or UI can safely consume.
+
+It is designed as a practical AI systems engineering example for:
+
+- structured prompting
+- backend orchestration
+- provider abstraction
+- schema validation
+- API design
+- reliability patterns
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Repository Structure](#repository-structure)
+- [API](#api)
+- [Running Locally](#running-locally)
+- [Testing Strategy](#testing-strategy)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Security](#security)
+- [Project Status](#project-status)
 
 ## Overview
 
@@ -9,6 +43,17 @@ Users often ask emotionally loaded and unstructured questions such as:
 > Should I move to Dubai for a software job?
 
 This project turns that type of input into a structured decision object with clear options, factors, risks, unknowns, and recommended follow-up questions.
+
+## Features
+
+- natural-language decision analysis over HTTP
+- structured JSON output with validation
+- OpenAI and Ollama provider support
+- mock mode for local development
+- Swagger UI and embedded OpenAPI spec
+- retry and malformed JSON repair logic
+- real LLM integration testing support
+- modular Go project layout for extension
 
 ## Example Decision Object
 
@@ -255,7 +300,7 @@ go test ./tests -run TestRealLLMDecisionFlow -v
 - `TestEngineRepairsMalformedJSON`
 - `TestRealLLMDecisionFlow` (skipped unless enabled with env)
 
-## Future Improvements
+## Roadmap
 
 - provider abstraction for OpenAI and Anthropic
 - decision scoring and ranking
@@ -263,3 +308,34 @@ go test ./tests -run TestRealLLMDecisionFlow -v
 - streaming partial reasoning metadata
 - human-in-the-loop editing workflows
 - decision graph generation with nodes and edges
+
+## Contributing
+
+Contributions are welcome.
+
+Useful contribution areas:
+
+- additional LLM providers
+- richer validation and scoring
+- authentication and rate limiting
+- persistence and history support
+- Docker and deployment tooling
+- CI workflows and release automation
+
+For pull requests, prefer:
+
+- focused changes
+- tests for new behavior
+- updates to [README.md](README.md) or [internal/api/docs/openapi.yaml](internal/api/docs/openapi.yaml) when behavior changes
+
+## Security
+
+- do not commit real API keys or `.env` files
+- prefer `.env.example` for documenting configuration
+- treat LLM output as untrusted until validated
+
+If you plan to publish this repository publicly, add a dedicated security policy and license file.
+
+## Project Status
+
+This project is currently in an experimental, portfolio-ready state. The core service works, but it is still a good candidate for hardening before production deployment.
