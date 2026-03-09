@@ -40,7 +40,7 @@ It is designed as a practical AI systems engineering example for:
 
 Users often ask emotionally loaded and unstructured questions such as:
 
-> Should I switch from mobile development to AI/LLM engineering?
+> Should I stop being a mobile developer and move into AI?
 
 This project turns that type of input into a structured decision object with clear options, factors, risks, unknowns, and recommended follow-up questions.
 
@@ -59,22 +59,16 @@ This project turns that type of input into a structured decision object with cle
 
 ```json
 {
-  "problem_definition": "Switching from mobile development to AI/LLM engineering",
-  "decision_type": "career",
-  "options": ["Transition into AI/LLM engineering", "Stay in mobile development"],
-  "key_factors": [
-    "market demand",
-    "learning curve",
-    "portfolio readiness",
-    "income stability",
-    "long-term career growth"
-  ],
-  "risks": ["temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"],
-  "unknowns": ["time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"],
+  "problem_definition": "Should I stop being a mobile developer and move into AI?",
+  "decision_type": "Career Change",
+  "options": ["Stay as a Mobile Developer", "Move into AI"],
+  "key_factors": ["Skill Set", "Financial Gain", "Personal Interest", "Job Security"],
+  "risks": ["Loss of Current Income", "Steep Learning Curve", "Uncertainty in Future Demand"],
+  "unknowns": ["Current Demand for AI Talent", "Time and Effort Required to Adapt"],
   "recommended_next_questions": [
-    "What AI/LLM skills are most required for target roles?",
-    "How long will it take to build a credible portfolio?",
-    "Can the transition start inside the current role?"
+    "What are the current demand and salary ranges for AI developers in my location?",
+    "How much time and effort will it take to adapt my skill set to AI?",
+    "What are the potential career growth opportunities in AI?"
   ]
 }
 ```
@@ -178,7 +172,7 @@ type Decision struct {
 
 ```json
 {
-  "question": "Should I switch from mobile development to AI/LLM engineering?"
+  "question": "Should I stop being a mobile developer and move into AI?"
 }
 ```
 
@@ -187,22 +181,16 @@ type Decision struct {
 ```json
 {
   "decision": {
-    "problem_definition": "Switching from mobile development to AI/LLM engineering",
-    "decision_type": "career",
-    "options": ["Transition into AI/LLM engineering", "Stay in mobile development"],
-    "key_factors": [
-      "market demand",
-      "learning curve",
-      "portfolio readiness",
-      "income stability",
-      "long-term career growth"
-    ],
-    "risks": ["temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"],
-    "unknowns": ["time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"],
+    "problem_definition": "Should I stop being a mobile developer and move into AI?",
+    "decision_type": "Career Change",
+    "options": ["Stay as a Mobile Developer", "Move into AI"],
+    "key_factors": ["Skill Set", "Financial Gain", "Personal Interest", "Job Security"],
+    "risks": ["Loss of Current Income", "Steep Learning Curve", "Uncertainty in Future Demand"],
+    "unknowns": ["Current Demand for AI Talent", "Time and Effort Required to Adapt"],
     "recommended_next_questions": [
-      "What AI/LLM skills are most required for target roles?",
-      "How long will it take to build a credible portfolio?",
-      "Can the transition start inside the current role?"
+      "What are the current demand and salary ranges for AI developers in my location?",
+      "How much time and effort will it take to adapt my skill set to AI?",
+      "What are the potential career growth opportunities in AI?"
     ]
   }
 }
@@ -275,7 +263,7 @@ Then open [http://localhost:8080/swagger/](http://localhost:8080/swagger/) to ex
 ```bash
 curl -X POST http://localhost:8080/v1/decision/analyze \
   -H "Content-Type: application/json" \
-      -d '{"question":"Should I switch from mobile development to AI/LLM engineering?"}'
+      -d '{"question":"Should I stop being a mobile developer and move into AI?"}'
 ```
 
 ### Run Tests
@@ -296,7 +284,7 @@ go test ./tests -run TestRealLLMDecisionFlow -v
 
 ### Career
 
-- Should I switch from mobile development to AI/LLM engineering?
+- Should I stop being a mobile developer and move into AI?
 
 ### Education
 

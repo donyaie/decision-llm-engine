@@ -27,22 +27,22 @@ func (s *stubClient) Generate(_ context.Context, _ string) (string, error) {
 func TestPromptBuilder(t *testing.T) {
 	builder := engine.NewPromptBuilder("Schema\nUser Question:\n{{user_input}}")
 
-	prompt, err := builder.Build("Should I switch from mobile development to AI/LLM engineering?")
+	prompt, err := builder.Build("Should I stop being a mobile developer and move into AI?")
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
 
-	if !strings.Contains(prompt, "Should I switch from mobile development to AI/LLM engineering?") {
+	if !strings.Contains(prompt, "Should I stop being a mobile developer and move into AI?") {
 		t.Fatalf("expected prompt to include question, got %q", prompt)
 	}
 }
 
 func TestDecisionValidation(t *testing.T) {
 	decision := model.Decision{
-		ProblemDefinition: "Switching from mobile development to AI/LLM engineering",
-		DecisionType:      "career",
-		Options:           []string{"Transition into AI/LLM engineering", "Stay in mobile development"},
-		KeyFactors:        []string{"market demand", "learning curve"},
+		ProblemDefinition: "Should I stop being a mobile developer and move into AI?",
+		DecisionType:      "Career Change",
+		Options:           []string{"Stay as a Mobile Developer", "Move into AI"},
+		KeyFactors:        []string{"Skill Set", "Financial Gain"},
 	}
 
 	if err := validation.ValidateDecision(decision); err != nil {
@@ -51,14 +51,14 @@ func TestDecisionValidation(t *testing.T) {
 }
 
 func TestJSONParsing(t *testing.T) {
-	raw := "```json\n{\n  \"problem_definition\": \"Switching from mobile development to AI/LLM engineering\",\n  \"decision_type\": \"career\",\n  \"options\": [\"Transition into AI/LLM engineering\", \"Stay in mobile development\"],\n  \"key_factors\": [\"market demand\", \"learning curve\"],\n  \"risks\": [\"temporary productivity dip\"],\n  \"unknowns\": [\"time needed to become job-ready\"],\n  \"recommended_next_questions\": [\"What AI/LLM skills are most required for target roles?\"]\n}\n```"
+	raw := "```json\n{\n  \"problem_definition\": \"Should I stop being a mobile developer and move into AI?\",\n  \"decision_type\": \"Career Change\",\n  \"options\": [\"Stay as a Mobile Developer\", \"Move into AI\"],\n  \"key_factors\": [\"Skill Set\", \"Financial Gain\"],\n  \"risks\": [\"Loss of Current Income\"],\n  \"unknowns\": [\"Current Demand for AI Talent\"],\n  \"recommended_next_questions\": [\"What are the current demand and salary ranges for AI developers in my location?\"]\n}\n```"
 
 	decision, err := engine.ParseDecision(raw)
 	if err != nil {
 		t.Fatalf("expected parsable json, got %v", err)
 	}
 
-	if decision.ProblemDefinition != "Switching from mobile development to AI/LLM engineering" {
+	if decision.ProblemDefinition != "Should I stop being a mobile developer and move into AI?" {
 		t.Fatalf("unexpected problem definition: %q", decision.ProblemDefinition)
 	}
 }
@@ -66,18 +66,18 @@ func TestJSONParsing(t *testing.T) {
 func TestEngineDecisionFlow(t *testing.T) {
 	client := &stubClient{responses: []string{
 		`{
-			"problem_definition": "Switching from mobile development to AI/LLM engineering",
-			"decision_type": "career",
-			"options": ["Transition into AI/LLM engineering", "Stay in mobile development"],
-			"key_factors": ["market demand", "learning curve"],
-			"risks": ["temporary productivity dip"],
-			"unknowns": ["time needed to become job-ready"],
-			"recommended_next_questions": ["What AI/LLM skills are most required for target roles?"]
+			"problem_definition": "Should I stop being a mobile developer and move into AI?",
+			"decision_type": "Career Change",
+			"options": ["Stay as a Mobile Developer", "Move into AI"],
+			"key_factors": ["Skill Set", "Financial Gain"],
+			"risks": ["Loss of Current Income"],
+			"unknowns": ["Current Demand for AI Talent"],
+			"recommended_next_questions": ["What are the current demand and salary ranges for AI developers in my location?"]
 		}`,
 	}}
 
 	decisionEngine := engine.NewDecisionEngine(engine.NewPromptBuilder("User Question:\n{{user_input}}"), client)
-	decision, err := decisionEngine.Analyze(context.Background(), "Should I switch from mobile development to AI/LLM engineering?")
+	decision, err := decisionEngine.Analyze(context.Background(), "Should I stop being a mobile developer and move into AI?")
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}

@@ -55,13 +55,13 @@ func generateMockDecision(question string) (string, error) {
 	switch {
 	case strings.Contains(lower, "mobile") && (strings.Contains(lower, "ai") || strings.Contains(lower, "llm")):
 		payload = decisionPayload{
-			ProblemDefinition: "Switching from mobile development to AI/LLM engineering",
-			DecisionType:      "career",
-			Options:           []string{"Transition into AI/LLM engineering", "Stay in mobile development"},
-			KeyFactors:        []string{"market demand", "learning curve", "portfolio readiness", "income stability", "long-term career growth"},
-			Risks:             []string{"temporary productivity dip", "shallow domain knowledge", "slower-than-expected job transition"},
-			Unknowns:          []string{"time needed to become job-ready", "availability of AI/LLM roles", "salary impact during transition"},
-			NextQuestions:     []string{"What AI/LLM skills are most required for target roles?", "How long will it take to build a credible portfolio?", "Can the transition start inside the current role?"},
+			ProblemDefinition: "Should I stop being a mobile developer and move into AI?",
+			DecisionType:      "Career Change",
+			Options:           []string{"Stay as a Mobile Developer", "Move into AI"},
+			KeyFactors:        []string{"Skill Set", "Financial Gain", "Personal Interest", "Job Security"},
+			Risks:             []string{"Loss of Current Income", "Steep Learning Curve", "Uncertainty in Future Demand"},
+			Unknowns:          []string{"Current Demand for AI Talent", "Time and Effort Required to Adapt"},
+			NextQuestions:     []string{"What are the current demand and salary ranges for AI developers in my location?", "How much time and effort will it take to adapt my skill set to AI?", "What are the potential career growth opportunities in AI?"},
 		}
 	case strings.Contains(lower, "master") && strings.Contains(lower, "ai"):
 		payload = decisionPayload{

@@ -55,7 +55,7 @@ components:
       properties:
         question:
           type: string
-          example: Should I switch from mobile development to AI/LLM engineering?
+          example: Should I stop being a mobile developer and move into AI?
     AnalyzeResponse:
       type: object
       required:
@@ -76,51 +76,49 @@ components:
       properties:
         problem_definition:
           type: string
-          example: Switching from mobile development to AI/LLM engineering
+          example: Should I stop being a mobile developer and move into AI?
         decision_type:
           type: string
-          example: career
+          example: Career Change
         options:
           type: array
           items:
             type: string
           example:
-            - Transition into AI/LLM engineering
-            - Stay in mobile development
+            - Stay as a Mobile Developer
+            - Move into AI
         key_factors:
           type: array
           items:
             type: string
           example:
-            - market demand
-            - learning curve
-            - portfolio readiness
-            - income stability
-            - long-term career growth
+            - Skill Set
+            - Financial Gain
+            - Personal Interest
+            - Job Security
         risks:
           type: array
           items:
             type: string
           example:
-            - temporary productivity dip
-            - shallow domain knowledge
-            - slower-than-expected job transition
+            - Loss of Current Income
+            - Steep Learning Curve
+            - Uncertainty in Future Demand
         unknowns:
           type: array
           items:
             type: string
           example:
-            - time needed to become job-ready
-            - availability of AI/LLM roles
-            - salary impact during transition
+            - Current Demand for AI Talent
+            - Time and Effort Required to Adapt
         recommended_next_questions:
           type: array
           items:
             type: string
           example:
-            - What AI/LLM skills are most required for target roles?
-            - How long will it take to build a credible portfolio?
-            - Can the transition start inside the current role?
+            - What are the current demand and salary ranges for AI developers in my location?
+            - How much time and effort will it take to adapt my skill set to AI?
+            - What are the potential career growth opportunities in AI?
     ErrorResponse:
       type: object
       required:
