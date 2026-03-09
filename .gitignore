@@ -1,0 +1,15 @@
+*.o
+*.a
+*.so
+.DS_Store
+dist/
+bin/
+.env
+.env.local
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+node_modules/
+.git/
