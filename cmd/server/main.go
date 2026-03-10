@@ -24,9 +24,12 @@ func main() {
 
 	appConfig := config.LoadFromEnv()
 
-	promptBuilder, err := engine.NewPromptBuilderFromFile(appConfig.Server.PromptPath)
+	promptBuilder, err := engine.NewPromptBuilderFromFiles(
+		appConfig.LLM.SystemPromptPath,
+		appConfig.LLM.SchemaPath,
+	)
 	if err != nil {
-		log.Fatalf("load prompt template: %v", err)
+		log.Fatalf("load prompt templates: %v", err)
 	}
 
 	decisionEngine := engine.NewDecisionEngine(promptBuilder, llm.NewClientFromConfig(appConfig.LLM))

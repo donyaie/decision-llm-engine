@@ -2,7 +2,6 @@ package tests
 
 import (
 	"context"
-	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -42,10 +41,12 @@ func TestRealLLMDecisionFlow(t *testing.T) {
 		t.Skip("real LLM test requires LLM_PROVIDER=openai or LLM_PROVIDER=ollama")
 	}
 
-	promptPath := filepath.Join("..", "prompts", "decision_prompt.txt")
-	promptBuilder, err := engine.NewPromptBuilderFromFile(promptPath)
+	promptBuilder, err := engine.NewPromptBuilderFromFiles(
+		llmConfig.SystemPromptPath,
+		llmConfig.SchemaPath,
+	)
 	if err != nil {
-		t.Fatalf("load prompt template: %v", err)
+		t.Fatalf("load prompt templates: %v", err)
 	}
 
 	decisionEngine := engine.NewDecisionEngine(promptBuilder, llm.NewClientFromEnv())

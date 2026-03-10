@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "required": [
+    "problem_definition",
+    "decision_type",
+    "options",
+    "key_factors",
+    "risks",
+    "unknowns",
+    "recommended_next_questions"
+  ],
+  "properties": {
+    "problem_definition": {
+      "type": "string",
+      "description": "A clear one-sentence statement of the decision the user is trying to make."
+    },
+    "decision_type": {
+      "type": "string",
+      "description": "A short category label for the decision, such as career, business, education, or general."
+    },
+    "options": {
+      "type": "array",
+      "description": "A concise list of realistic options or courses of action the user could choose from.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2
+    },
+    "key_factors": {
+      "type": "array",
+      "description": "The most important criteria, constraints, or variables that should drive the decision.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "description": "The main risks, downsides, or failure modes associated with the decision or options.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "description": "Important missing information, assumptions, or uncertainties that reduce confidence in the decision.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_next_questions": {
+      "type": "array",
+      "description": "Helpful follow-up questions that would improve the quality of the decision if answered.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

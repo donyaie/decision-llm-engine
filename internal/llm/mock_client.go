@@ -11,7 +11,7 @@ import (
 type MockLLMClient struct{}
 
 // Generate synthesizes realistic JSON for local development and tests.
-func (MockLLMClient) Generate(_ context.Context, prompt string) (string, error) {
+func (MockLLMClient) Generate(_ context.Context, prompt, _ string) (string, error) {
 	if strings.Contains(strings.ToLower(prompt), "fix this json") {
 		return repairPromptResponse(prompt), nil
 	}

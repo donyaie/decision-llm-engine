@@ -63,11 +63,13 @@ func newOpenAIClient(cfg config.LLMConfig) LLMClient {
 	}
 }
 
+
 // Generate sends the prompt to the provider and returns raw text.
-func (c *OpenAIClient) Generate(ctx context.Context, prompt string) (string, error) {
+func (c *OpenAIClient) Generate(ctx context.Context, prompt, systemPrompt string) (string, error) {
 	payload := chatCompletionRequest{
 		Model: c.model,
 		Messages: []chatCompletionInput{
+			{Role: "system", Content: systemPrompt},
 			{Role: "user", Content: prompt},
 		},
 		Temperature:    0.2,

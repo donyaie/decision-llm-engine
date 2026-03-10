@@ -46,10 +46,12 @@ func newOllamaClient(cfg config.LLMConfig) LLMClient {
 }
 
 // Generate sends the prompt to Ollama and returns raw text.
-func (c *OllamaClient) Generate(ctx context.Context, prompt string) (string, error) {
+func (c *OllamaClient) Generate(ctx context.Context, prompt, systemPrompt string) (string, error) {
+	combinedPrompt := "System Instructions:\n" + strings.TrimSpace(systemPrompt) + "\n\nUser Prompt:\n" + prompt
+
 	payload := ollamaGenerateRequest{
 		Model:  c.model,
-		Prompt: prompt,
+		Prompt: combinedPrompt,
 		Stream: false,
 		Format: "json",
 	}

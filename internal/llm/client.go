@@ -19,12 +19,12 @@ const (
 
 // Client abstracts LLM generation.
 type Client interface {
-	Generate(ctx context.Context, prompt string) (string, error)
+	Generate(ctx context.Context, prompt, systemPrompt string) (string, error)
 }
 
 // LLMClient is the provider-specific implementation behind the shared client.
 type LLMClient interface {
-	Generate(ctx context.Context, prompt string) (string, error)
+	Generate(ctx context.Context, prompt, systemPrompt string) (string, error)
 }
 
 type client struct {
@@ -50,8 +50,8 @@ func NewClientFromConfig(cfg config.LLMConfig) Client {
 	return NewClient(newLLMClientFromConfig(cfg))
 }
 
-func (c *client) Generate(ctx context.Context, prompt string) (string, error) {
-	return c.provider.Generate(ctx, prompt)
+func (c *client) Generate(ctx context.Context, prompt, systemPrompt string) (string, error) {
+	return c.provider.Generate(ctx, prompt, systemPrompt)
 }
 
 func newLLMClientFromConfig(cfg config.LLMConfig) LLMClient {
@@ -66,10 +66,6 @@ func newLLMClientFromConfig(cfg config.LLMConfig) LLMClient {
 	default:
 		return MockLLMClient{}
 	}
-}
-
-func providerFromEnv() string {
-	return strings.TrimSpace(config.LoadFromEnv().LLM.Provider)
 }
 
 func normalizeProvider(provider string) string {

@@ -91,7 +91,7 @@ LLM Client
 Structured JSON Output
       |
       v
-Schema Validation
+Schema Validation from decision_schema.json
       |
       v
 Decision Object
@@ -116,7 +116,10 @@ decision-llm-engine
 │   │   └── swagger.go
 │   ├── engine
 │   │   ├── decision_engine.go
-│   │   └── prompt_builder.go
+│   │   ├── decision_parser.go
+│   │   ├── normalize_helpers.go
+│   │   ├── prompt_builder.go
+│   │   └── schema_validator.go
 │   ├── config
 │   │   └── config.go
 │   ├── llm
@@ -128,10 +131,9 @@ decision-llm-engine
 │   │   └── decision.go
 │   ├── reliability
 │   │   └── retry.go
-│   └── validation
-│       └── schema_validator.go
 ├── prompts
-│   └── decision_prompt.txt
+│   ├── decision_schema.json
+│   └── system_prompt.txt
 ├── tests
 │   ├── engine_test.go
 │   └── real_llm_test.go
@@ -206,7 +208,7 @@ The prompt layer instructs the model to:
 - surface risks and unknowns
 - return only valid JSON matching the schema
 
-The default template lives in [prompts/decision_prompt.txt](prompts/decision_prompt.txt).
+The user prompt is built directly from [prompts/decision_schema.json](prompts/decision_schema.json) and the incoming question, while shared behavior instructions live in [prompts/system_prompt.txt](prompts/system_prompt.txt).
 
 ## Reliability Strategy
 
@@ -217,7 +219,7 @@ This service is built to demonstrate production-minded LLM engineering:
 - parse fenced JSON and embedded JSON objects
 - attempt lightweight JSON repair for malformed output
 - fall back to a secondary repair prompt if needed
-- validate required schema fields before responding
+- validate responses against [prompts/decision_schema.json](prompts/decision_schema.json) before responding
 
 ## LLM Client Behavior
 
@@ -233,7 +235,8 @@ Environment variables are loaded into a typed config object in [internal/config/
 
 - `LLM_PROVIDER` - `openai`, `ollama`, or `mock`; default is `openai` when `OPENAI_API_KEY` is set, otherwise `mock`
 - `PORT` - HTTP port, default `8080`
-- `PROMPT_PATH` - prompt template path, default `prompts/decision_prompt.txt`
+- `SCHEMA_PATH` - decision schema path, default `prompts/decision_schema.json`
+- `SYSTEM_PROMPT_PATH` - shared system prompt for all LLM providers, default `prompts/system_prompt.txt`
 - `OPENAI_API_KEY` - enables live provider mode
 - `OPENAI_BASE_URL` - optional override for OpenAI-compatible endpoints
 - `OPENAI_MODEL` - optional model name override
@@ -299,6 +302,7 @@ go test ./tests -run TestRealLLMDecisionFlow -v
 ### Unit Tests
 
 - `TestPromptBuilder`
+- `TestPromptBuilderBuildsSystemPrompt`
 - `TestDecisionValidation`
 - `TestJSONParsing`
 
