@@ -47,7 +47,7 @@ This project turns that type of input into a structured decision object with cle
 ## Features
 
 - natural-language decision analysis over HTTP
-- structured JSON output with validation
+- structured JSON output with JSON Schema validation
 - OpenAI and Ollama provider support
 - mock mode for local development
 - Swagger UI and embedded OpenAPI spec
@@ -117,7 +117,6 @@ decision-llm-engine
 │   ├── engine
 │   │   ├── decision_engine.go
 │   │   ├── decision_parser.go
-│   │   ├── normalize_helpers.go
 │   │   ├── prompt_builder.go
 │   │   └── schema_validator.go
 │   ├── config
@@ -142,6 +141,8 @@ decision-llm-engine
 ```
 
 ## Decision Schema
+
+Runtime validation uses [prompts/decision_schema.json](prompts/decision_schema.json) through `github.com/santhosh-tekuri/jsonschema/v5`.
 
 ```go
 type Decision struct {
@@ -219,7 +220,7 @@ This service is built to demonstrate production-minded LLM engineering:
 - parse fenced JSON and embedded JSON objects
 - attempt lightweight JSON repair for malformed output
 - fall back to a secondary repair prompt if needed
-- validate responses against [prompts/decision_schema.json](prompts/decision_schema.json) before responding
+- validate responses against [prompts/decision_schema.json](prompts/decision_schema.json) with `santhosh-tekuri/jsonschema/v5` before responding
 
 ## LLM Client Behavior
 
